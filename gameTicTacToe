@@ -1,0 +1,147 @@
+  
+package tictactoe;
+
+ 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+ 
+public class TicTacToe {
+static ArrayList<Integer> playerPos = new ArrayList<Integer>();
+static ArrayList<Integer> cpuPos = new ArrayList<Integer>();
+private static char grid[][];
+    public static void main(String[] args) {
+     System.out.println("hello world");
+     createGrid();
+     
+     
+        
+    }
+    public static void createGrid()
+    {
+    char[][] grid ={{' ','|',' ','|',' '},
+                     {'-','+','-','+','-'},
+                    {' ','|',' ','|',' '},
+                    {'-','+','-','+','-'},
+                    {' ','|',' ','|',' '}};
+    
+ printPart(grid);
+          Scanner sc= new Scanner(System.in);  
+          while(true)
+          {
+         System.out.println("enter your choice first player grid no. 1->9  ");
+         int pos = sc.nextInt();
+         System.out.println(pos);
+        while(playerPos.contains(pos ) || cpuPos.contains(pos)){
+            System.out.println("position taken ! enter another position");
+           
+             pos = sc.nextInt();
+             
+        } 
+       placePiece(grid, pos, "player");
+       playerPos.add(pos);
+       
+        String result = checkWinner();
+        if(result.length() >0){
+        System.out.println(result);
+        break;
+    }
+       Random R = new Random();
+       int posCpu = R.nextInt(1,9);
+while(playerPos.contains(posCpu ) || cpuPos.contains(posCpu)){
+             posCpu = R.nextInt(1,9);
+        } 
+       placePiece(grid, posCpu, "cpu");
+        
+        cpuPos.add(posCpu);
+         
+        result = checkWinner();
+        if(result.length() >0){
+        System.out.println(result);
+        break;
+    }
+          }
+}
+ public static void printPart(char grid[][]){
+     for(int i = 0; i<5 ; i++){ 
+         for(int j = 0; j<5 ; j++){
+             System.out.print(grid[i][j]);
+         }
+         System.out.println();
+    }
+ }
+  
+ public static void placePiece(char[][] grid, int pos, String user ){
+      char symbol = ' ';
+     if(user.equals("player")) symbol = 'X';
+     else if (user.equals("cpu")) symbol = 'o';
+         switch(pos)
+    {
+        case 1 :
+            grid[0][0]= symbol;
+            break;
+        case 2 :
+            grid[0][2]= symbol;
+            break;
+        case 3 :
+            grid[0][4]= symbol;
+            break;    
+        case 4 :
+            grid[2][0]= symbol;
+            break;   
+        case 5 :
+            grid[2][2]= symbol;
+            break;
+        case 6 :
+            grid[2][4]= symbol;
+            break;
+        case 7 :
+            grid[4][0]= symbol;
+            break;
+        case 8 :
+            grid[4][2]= symbol;
+            break;    
+            
+        case 9 :
+            grid[4][4]= symbol;
+            break;   
+         }        
+         
+         
+        printPart(grid);
+ }
+ public static String checkWinner(){
+     List topROW = Arrays.asList(1,2,3);
+     List middleROW = Arrays.asList(4,5,6);
+     List downROW = Arrays.asList(7,8,9);
+     List leftcol = Arrays.asList(1,4,7);
+     List midcol = Arrays.asList(2,5,8);
+     List rightcol = Arrays.asList(3,6,9); 
+     List cross1 = Arrays.asList(1,5,9);
+     List cross2 = Arrays.asList(3,5,7);
+        List<List> winning = new ArrayList<List>(); 
+        winning.add(topROW);
+        winning.add(middleROW);
+        winning.add(downROW);
+        winning.add(leftcol); 
+        winning.add(midcol);
+        winning.add(rightcol);
+        winning.add(cross1);
+        winning.add(cross2);
+        for(List l : winning){
+            if(playerPos.containsAll(l)){
+              return  "COngratualtions you won ☺";
+            }else  if (cpuPos.containsAll(l)){
+                return "cpu win sorry :(";
+            }
+            else if (playerPos.size() + cpuPos.size() ==9 ){
+            return"Dog";
+        }
+        }
+        return "";
+ }
+}
+      
