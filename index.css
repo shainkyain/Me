@@ -1,0 +1,64 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    border: 0;
+}
+ .navigation {
+display: grid;
+justify-content: right;
+display: -ms-inline-grid;
+border: 3px solid;
+background-color: rgb(215, 235, 246);
+
+ }
+ li{
+    display: flex;
+     display: inline-flex;
+ 
+    padding: 3vh 5vh;
+     
+    
+}
+li a{
+    text-decoration: none;
+    color: rgb(110, 82, 161);
+    font-weight: 600;
+}
+.body1{
+    display: flex;
+ justify-content: center;
+  
+
+}
+.rightside {
+  
+    padding: 25px;
+    color: blanchedalmond;
+    font-style: italic;
+    font-weight: 200;
+}
+.leftside{
+    padding: 25px;
+    
+}
+
+body{
+    background-color: rgb(32, 46, 67);
+overflow: scroll;
+}
+footer{
+    border: 3px solid;
+    background-color: white;
+    display: flex;
+   
+    position: fixed;
+    bottom: 0;
+    
+
+}
+.leftside h3{
+    color: yellow;
+}
+.leftside p{
+    color: cornsilk;
+}
